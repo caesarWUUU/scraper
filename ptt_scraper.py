@@ -34,11 +34,17 @@ vote_count = Counter()
 
 for c in results:
     content = c['content'].replace(':', '').strip()  # ✅ 修正：去掉 ':'，避免影響匹配
-    if content.startswith('@'):  
-        candidate = content[1:2]  # ✅ 修正：正確提取 `@` 後的名稱
-        vote_count[candidate] += 1 
+    if content.startswith('@'):
+        candidate = content[1:2]
+        if candidate in ['I', 'G']:
+            vote_count[candidate] += 1
 
 
 print("投票結果:")
 for candidate, votes in vote_count.items():
-    print(f"{candidate}: {votes} 票")
+    if candidate == 'I':
+        candidate = '赫蘿'
+    else:
+        candidate = '八奈見杏菜'
+    print(f'{candidate} 得票數: {votes}')
+
